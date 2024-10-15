@@ -1,14 +1,46 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
     max-width: 1400px;
 }
 
-h1{
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: #093341;
+}
+
+li{
+    list-style: none;
+}
+
+div.div-container {
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding-top: 1rem;
+    align-items: center;
+    height: 100vh;
+}
+
+div.my_div-container {
+    height: 350px;
+    width: 700px;
+    border-radius: 0.8rem;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    color: #093341;
+    margin-bottom: 3rem;
+}
+
+input{
+    margin-bottom: 1.5rem;
+    width: 500px;
+    height: 45px;
+    border-radius: .5rem;
+    border: solid rgb(190, 190, 190) 1px;
 }
