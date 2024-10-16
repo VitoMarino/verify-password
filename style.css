@@ -44,3 +44,11 @@ input{
     border-radius: .5rem;
     border: solid rgb(190, 190, 190) 1px;
 }
+
+.black{
+    color: black;
+}
+
+.green{
+    color: rgba(47, 255, 68, 0.717);
+}

@@ -1,10 +1,16 @@
 //! Prima funzione controllo 9 caratteri
 function characters() {
     let password = document.getElementById('my-input').value;
+    let liOne = document.querySelector('.li-one');
+    let liTwo = document.querySelector('.li-two');
+    let liThree = document.querySelector('.li-three');
+    let liFour = document.querySelector('.li-four');
 
     if (password.length < 9) {
+        liOne.classList.add('black');
         console.log('La password non può essere minore di 9 caratteri');
     } else {
+        liOne.classList.add('green');
         console.log('Primo Check');
     }
 }
