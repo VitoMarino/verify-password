@@ -15,6 +15,7 @@ li{
     color: grey;
 }
 
+/* Container verifica password */
 div.div-container {
     display: flex;
     justify-content: center;
@@ -22,6 +23,7 @@ div.div-container {
     height: 100vh;
 }
 
+/* "CARD" verifica password */
 div.my_div-container {
     height: 350px;
     width: 700px;
@@ -46,6 +48,7 @@ input{
     border: solid rgb(190, 190, 190) 1px;
 }
 
+/* Classi dinamiche per javascript */
 .grey{
     color: grey;
 }
@@ -53,6 +56,8 @@ input{
 .green{
     color: #58de28;
 }
+
+/* Classi dinamiche per javascript avanzamento della progress bar */
 
 #progress-bar-container{
     margin-top: 2rem;

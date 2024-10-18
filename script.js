@@ -1,3 +1,7 @@
+// Selettore globale
+let iV = document.querySelector('.icon-v');
+iV.style.display = 'none';
+
 //! Funzione di avanzamento della progressBar
 function updateBar(){
     let password = document.getElementById('my-input').value;
@@ -31,14 +35,25 @@ function updateBar(){
 function characters() {
     let password = document.getElementById('my-input').value;
     let liOne = document.querySelector('.li-one');
+    let iX = document.querySelector('.icon-x');
 
     if (password.length < 9){
         liOne.classList.add('grey');
         liOne.classList.remove('green');
+        
+        // Icons
+        iV.style.display = 'none';
+        iX.style.display = 'inline-block';
+
         console.log('La password non può essere minore di 9 caratteri');
     } else {
-        liOne.classList.remove('black')
+        liOne.classList.remove('grey');
         liOne.classList.add('green');
+
+        // Icons
+        iX.style.display = 'none';
+        iV.style.display = 'inline-block';
+
         console.log('Primo Check');
     }
 
@@ -50,6 +65,8 @@ function characters() {
 function capitalLetter() {
     let password = document.getElementById('my-input').value;
     let liTwo = document.querySelector('.li-two');
+    let iX = document.querySelector('.icon-x');
+
     //Espressione regolare /[A-Z]/: Questa espressione controlla se c’è almeno un carattere maiuscolo nella password.
 	// A-Z rappresenta tutti i caratteri maiuscoli.
     // test(password) restituisce true se trova almeno un carattere che corrisponde alla condizione e false altrimenti.
@@ -57,10 +74,19 @@ function capitalLetter() {
         liTwo.classList.add('grey');
         liTwo.classList.remove('green');
 
+        // Icons
+        iV.style.display = 'none';
+        iX.style.display = 'inline-block';
+
         console.log('La password deve avere almeno un carattere maiuscolo');
     } else {
         liTwo.classList.remove('grey')
         liTwo.classList.add('green');
+
+        // Icons
+        iX.style.display = 'none';
+        iV.style.display = 'inline-block';
+
         console.log('Secondo Check');
     }
 
@@ -71,13 +97,25 @@ function capitalLetter() {
 function number() {
     let password = document.getElementById('my-input').value;
     let liThree = document.querySelector('.li-three');
+    let iX = document.querySelector('.icon-x');
+
     if (!/[0-9]/.test(password)) {
         liThree.classList.add('grey');
         liThree.classList.remove('green');
+
+        // Icons
+        iV.style.display = 'none';
+        iX.style.display = 'inline-block';
+
         console.log('La password deve avere almeno un numero');
     } else {
-        liThree.classList.remove('grey')
-        liThree.classList.add('green');;
+        liThree.classList.remove('grey');
+        liThree.classList.add('green');
+
+        // Icons
+        iX.style.display = 'none';
+        iV.style.display = 'inline-block';
+
         console.log('Terzo Check');
     }
 
@@ -89,6 +127,7 @@ function specialCharacter() {
     const sC = ['!', '?', '/', '+', '*'];
     let liFour = document.querySelector('.li-four');
     let password = document.getElementById('my-input').value;
+    let iX = document.querySelector('.icon-x');
 
     // password.includes(char) = La funzione includes() verfica se la password contiene uno dei caratteri speciali. 
     // Al posto di char posso mettere anche pippo. Mi rappresenta l'elemento dell'array.
@@ -96,12 +135,22 @@ function specialCharacter() {
     
     const control = sC.some(char => password.includes(char));
     if(control){
-        liFour.classList.remove('grey')
+        liFour.classList.remove('grey');
         liFour.classList.add('green');
+
+        // Icons
+        iX.style.display = 'none';
+        iV.style.display = 'inline-block';
+
         return console.log('Quarto Check')
     } else {
         liFour.classList.add('grey');
         liFour.classList.remove('green');
+
+        // Icons
+        iV.style.display = 'none';
+        iX.style.display = 'inline-block';
+        
         return console.log('La password deve avere almeno un carattere speciale')
     }
 
