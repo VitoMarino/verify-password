@@ -1,176 +1,99 @@
-// Selettore globale
-let iV = document.querySelector('.icon-v');
-iV.style.display = 'none';
+// Selettori globali
+let iX = document.querySelectorAll('.icon-x'); // Seleziona tutte le icone di errore
+let iV = document.querySelectorAll('.icon-v'); // Seleziona tutte le icone di successo
 
-//! Funzione di avanzamento della progressBar
-function updateBar(){
+// Nascondi tutte le icone di successo all'inizio
+iV.forEach(icon => {
+    icon.style.display = 'none';
+});
+
+// Funzione per aggiornare la visualizzazione delle icone
+// index: Indica quale coppia di icone (successo e errore) deve essere aggiornata. 
+// Ad esempio, se index è 0, la funzione si riferisce al primo controllo (ad esempio, lunghezza della password).
+function updateIcons(index, success) {
+    if (success) {
+        iX[index].style.display = 'none'; // Nascondi l'icona di errore
+        iV[index].style.display = 'inline-block'; // Mostra l'icona di successo
+    } else {
+        iX[index].style.display = 'inline-block'; // Mostra l'icona di errore
+        iV[index].style.display = 'none'; // Nascondi l'icona di successo
+    }
+}
+
+// Funzione di avanzamento della progressBar
+function updateBar() {
     let password = document.getElementById('my-input').value;
     let progress = 0;
 
-    if (password.length >= 9){
-        progress += 25;
-    }
-
-    if (/[A-Z]/.test(password)){
-        progress += 25;
-    }
-
-    if (/[0-9]/.test(password)){
-        progress += 25;
-    }
-
-    const sC = ['!', '?', '/', '+', '*'];
-    const control = sC.some(char => password.includes(char));
-    
-    if (control){
-        progress += 25;
-    }
+    if (password.length >= 9) progress += 25;
+    if (/[A-Z]/.test(password)) progress += 25;
+    if (/[0-9]/.test(password)) progress += 25;
+    const specialChars = ['!', '?', '/', '+', '*'];
+    if (specialChars.some(char => password.includes(char))) progress += 25;
 
     // Aggiorna la barra di avanzamento
-    let divProgressBar = document.getElementById('progress-bar');
-    divProgressBar.style.width = progress + '%';
+    document.getElementById('progress-bar').style.width = progress + '%';
 }
 
-//! Prima funzione controllo 9 caratteri
-function characters() {
+// Funzione per controllare la password
+function checkPassword() {
     let password = document.getElementById('my-input').value;
-    let liOne = document.querySelector('.li-one');
-    let iX = document.querySelector('.icon-x');
 
-    if (password.length < 9){
+    // Controllo 1: lunghezza password
+    let liOne = document.querySelector('.li-one');
+    if (password.length < 9) {
         liOne.classList.add('grey');
         liOne.classList.remove('green');
-        
-        // Icons
-        iV.style.display = 'none';
-        iX.style.display = 'inline-block';
-
-        console.log('La password non può essere minore di 9 caratteri');
+        updateIcons(0, false); // Aggiorna per il primo controllo
     } else {
         liOne.classList.remove('grey');
         liOne.classList.add('green');
-
-        // Icons
-        iX.style.display = 'none';
-        iV.style.display = 'inline-block';
-
-        console.log('Primo Check');
+        updateIcons(0, true);
     }
 
-    updateBar();
-}
-
-
-//! Seconda funzione controllo lettera maiuscola
-function capitalLetter() {
-    let password = document.getElementById('my-input').value;
+    // Controllo 2: lettera maiuscola
     let liTwo = document.querySelector('.li-two');
-    let iX = document.querySelector('.icon-x');
-
-    //Espressione regolare /[A-Z]/: Questa espressione controlla se c’è almeno un carattere maiuscolo nella password.
-	// A-Z rappresenta tutti i caratteri maiuscoli.
-    // test(password) restituisce true se trova almeno un carattere che corrisponde alla condizione e false altrimenti.
-    if (!/[A-Z]/.test(password) ) {
+    if (!/[A-Z]/.test(password)) {
         liTwo.classList.add('grey');
         liTwo.classList.remove('green');
-
-        // Icons
-        iV.style.display = 'none';
-        iX.style.display = 'inline-block';
-
-        console.log('La password deve avere almeno un carattere maiuscolo');
+        updateIcons(1, false);
     } else {
-        liTwo.classList.remove('grey')
+        liTwo.classList.remove('grey');
         liTwo.classList.add('green');
-
-        // Icons
-        iX.style.display = 'none';
-        iV.style.display = 'inline-block';
-
-        console.log('Secondo Check');
+        updateIcons(1, true);
     }
 
-    updateBar();
-}
-
-//! Terza funzione controllo numeri
-function number() {
-    let password = document.getElementById('my-input').value;
+    // Controllo 3: numero
     let liThree = document.querySelector('.li-three');
-    let iX = document.querySelector('.icon-x');
-
     if (!/[0-9]/.test(password)) {
         liThree.classList.add('grey');
         liThree.classList.remove('green');
-
-        // Icons
-        iV.style.display = 'none';
-        iX.style.display = 'inline-block';
-
-        console.log('La password deve avere almeno un numero');
+        updateIcons(2, false);
     } else {
         liThree.classList.remove('grey');
         liThree.classList.add('green');
-
-        // Icons
-        iX.style.display = 'none';
-        iV.style.display = 'inline-block';
-
-        console.log('Terzo Check');
+        updateIcons(2, true);
     }
 
-    updateBar();
-}
-
-//! Quarta funzione controllo caratteri speciali
-function specialCharacter() {
-    const sC = ['!', '?', '/', '+', '*'];
+    // Controllo 4: caratteri speciali
+    const specialChars = ['!', '?', '/', '+', '*'];
     let liFour = document.querySelector('.li-four');
-    let password = document.getElementById('my-input').value;
-    let iX = document.querySelector('.icon-x');
-
-    // password.includes(char) = La funzione includes() verfica se la password contiene uno dei caratteri speciali. 
-    // Al posto di char posso mettere anche pippo. Mi rappresenta l'elemento dell'array.
-    // il metoodo 'some' mi restituise true se almeno uno degli elementi dell'array soddisfa la condizione
-    
-    const control = sC.some(char => password.includes(char));
-    if(control){
+    if (specialChars.some(char => password.includes(char))) {
         liFour.classList.remove('grey');
         liFour.classList.add('green');
-
-        // Icons
-        iX.style.display = 'none';
-        iV.style.display = 'inline-block';
-
-        return console.log('Quarto Check')
+        updateIcons(3, true);
     } else {
         liFour.classList.add('grey');
         liFour.classList.remove('green');
-
-        // Icons
-        iV.style.display = 'none';
-        iX.style.display = 'inline-block';
-        
-        return console.log('La password deve avere almeno un carattere speciale')
+        updateIcons(3, false);
     }
 
-    updateBar();
+    updateBar(); // Aggiorna la barra di avanzamento
 }
 
-//? INVOCO LA FUNZIONE E LA FACCIO AVVIARE ALL'INVIO DELL'ENTER
-// Aggiungo l'evento per eseguire la funzione al press di Enter
-// Stiamo registrando un gestore per l’evento keydown, che viene attivato
-// quando un tasto sulla tastiera viene premuto 
-// mentre l’elemento my-input è in focus.
-
-// Creo una funzione anonima con argomento event. Viene eseguita ogni volta che si verifica l'evento keydown
-// L’oggetto event contiene informazioni sull’evento che si è verificato, come il tasto che è stato premuto.
+// Evento di pressione del tasto Enter
 document.getElementById('my-input').addEventListener('keydown', function (event) {
-    // event.key è una proprietà dell’oggetto event che restituisce una stringa rappresentante il tasto specifico che è stato premuto.
     if (event.key === 'Enter') {
-        characters();
-        capitalLetter();
-        number();
-        specialCharacter();
+        checkPassword(); // Controlla la password quando viene premuto Enter
     }
 });
