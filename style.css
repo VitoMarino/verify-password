@@ -12,6 +12,7 @@ body {
 
 li{
     list-style: none;
+    color: grey;
 }
 
 div.div-container {
@@ -45,10 +46,24 @@ input{
     border: solid rgb(190, 190, 190) 1px;
 }
 
-.black{
-    color: black;
+.grey{
+    color: grey;
 }
 
 .green{
-    color: rgba(47, 255, 68, 0.717);
+    color: #58de28;
+}
+
+#progress-bar-container{
+    margin-top: 2rem;
+    width: 90%;
+    background-color: grey;
+    border-radius: 5px;
+}
+
+#progress-bar{
+    width: 0%;
+    height: 30px;
+    background-color: #58de28;
+    border-radius: 5px;
 }
